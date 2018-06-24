@@ -1,3 +1,20 @@
+#Main modifications made to the original site to run qiuckier:
+
+- in index.html
+	-move style.css and print.css inline. There was not much code, so it is not necessary to put the style in different file. In this way, the page loads qiuckier.
+	-remove downloading font
+	-made google analytics script load async; move the function at the bottom of the page (the function is not changing DOM, so it's not necessary to load it at the beginning)
+	
+- in main.js (for pizzas)
+	-pizzaImageContainer and pizzaDescriptionContainer changed their .style.width=... using bootstrap to col-md-...
+	-function changePizzaSizes:
+		*change querySelectorAll to getElementsByClassName
+		*there is less accessing the DOM because I set working variables before the loop
+		*adding second loop to lower the need to render and paint too much 
+	-function updatePositions:
+		*move repeated steps before the for cycle
+
+
 ## Website Performance Optimization portfolio project
 
 Your challenge, if you wish to accept it (and we sure hope you will), is to optimize this online portfolio for speed! In particular, optimize the critical rendering path and make this page render as quickly as possible by applying the techniques you've picked up in the [Critical Rendering Path course](https://www.udacity.com/course/ud884).

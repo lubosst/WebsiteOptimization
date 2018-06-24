@@ -449,8 +449,9 @@ var resizePizzas = function(size) {
 
   // Iterates through pizza elements on the page and changes their widths
   function changePizzaSizes(size) {
-	var pizzaContainerLength = document.getElementsByClassName("randomPizzaContainer").length;
+	// Sets randomPizzaContainer before the for loop to save repeated processing
 	var randomPizzaContainer = document.getElementsByClassName("randomPizzaContainer");
+	var pizzaContainerLength = document.getElementsByClassName("randomPizzaContainer").length;
 	var newWidth = [];
 	for (var i = 0; i < pizzaContainerLength; i++) {
 		var dx = determineDx(randomPizzaContainer[i], size);
@@ -458,7 +459,7 @@ var resizePizzas = function(size) {
     }
 	//new for loop to set the styles
     for (var i = 0; i < pizzaContainerLength; i++) {
-		randomPizzaContainer[i].style.width = newwidth[i];
+		randomPizzaContainer[i].style.width = newWidth[i];
     }
   }
 
@@ -509,6 +510,8 @@ function updatePositions() {
   window.performance.mark("mark_start_frame");
 
   var items = document.getElementsByClassName('mover');
+
+	//move this variables outside for cycle, value is still the same, so there is no need to have them repeatetly gian the same value
     var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
     var phase = Math.sin((scrollTop / 1250) + (i % 5));											 
   for (var i = 0; i < items.length; i++) {
@@ -534,6 +537,7 @@ window.addEventListener('scroll', updatePositions);
 document.addEventListener('DOMContentLoaded', function() {
   var cols = 8;
   var s = 256;
+			  
   for (var i = 0; i < 200; i++) {
     var elem = document.createElement('img');
     elem.className = 'mover';
@@ -542,7 +546,7 @@ document.addEventListener('DOMContentLoaded', function() {
     elem.style.width = "73.333px";
     elem.basicLeft = (i % cols) * s;
     elem.style.top = (Math.floor(i / cols) * s) + 'px';
-    document.querySelector("#movingPizzas1").appendChild(elem);
+    document.getElementById("movingPizzas1").appendChild(elem);
   }
   updatePositions();
 });
